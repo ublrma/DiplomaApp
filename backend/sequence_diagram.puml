@@ -1,0 +1,17 @@
+@startuml
+participant User
+participant Flask Server
+participant Wav2Vec2 Model
+participant Google Translate
+participant DeepAI API
+
+User -> Flask Server: POST /upload-audio
+Flask Server -> Flask Server: Save Audio File
+Flask Server -> Wav2Vec2 Model: Process Audio
+Wav2Vec2 Model -> Flask Server: Return Transcription
+Flask Server -> Google Translate: Translate Text
+Google Translate -> Flask Server: Return Translation
+Flask Server -> DeepAI API: Generate Image
+DeepAI API -> Flask Server: Return Image URL
+Flask Server -> User: Return JSON {transcription, image_url}
+@enduml
